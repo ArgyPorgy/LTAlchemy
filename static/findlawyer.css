@@ -177,3 +177,11 @@ h1 {
 .book-appointment-btn:hover {
     background-color: #0056b3;
 }
+a {
+    color: blue; /* Sets the text color to blue */
+    text-decoration: none; /* Removes underline from the link */
+}
+
+a:hover {
+    color: darkblue; /* Sets the text color to dark blue on hover */
+}

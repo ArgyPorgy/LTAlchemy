@@ -9,6 +9,7 @@ import os
 from dotenv import load_dotenv
 from bson import ObjectId
 import uuid
+import webbrowser
 import PyPDF2
 
 load_dotenv()
@@ -177,6 +178,7 @@ def lawyerlogin():
             return render_template('lawyerlogin.html', message='Invalid email or password. Please try again.')
             
     return render_template('lawyerlogin.html') 
+
 @app.route('/findlawyer', methods=['POST','GET'])
 def findlawyer():
     results = []
