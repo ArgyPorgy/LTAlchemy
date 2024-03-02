@@ -25,6 +25,11 @@
     <div id="results">
       {% for result in results %}
       <div>
+        <img
+          src="static/{{result.image}}"
+          alt="Image Unavailable"
+          class="lawIMG"
+        />
         <p>Name: {{ result.name }}</p>
         <p>Email: {{ result.email }}</p>
         <p>Phone Number: {{ result.phone }}</p>

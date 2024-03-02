@@ -141,6 +141,7 @@ def lawyerregister():
     if request.method == 'POST':
         # imagen = request.files['image']
         # print(imagen)
+        image = request.files['image']
         lawyer_data = {
             'name': request.form['name'],
             'phone': request.form['phone'],
@@ -148,21 +149,24 @@ def lawyerregister():
             'address': request.form['address'],
             'department': request.form['department'],
             'password': request.form['password'],
-            # 'image': imagen,
+            'image': str(uuid.uuid4()) + '.' + image.filename.rsplit('.', 1)[1].lower()
         }
+        
+        # image.save('static/' + image)
 
+        
         existing_user = lawyercollection.find_one({'email': lawyer_data['email']})
         if existing_user:
             message = "User already exists. Please login."
-            return render_template('lawyerreg.html', message=message)
+            return render_template('lawyerlogin.html', message=message)
             
         else:
             lawyercollection.insert_one(lawyer_data)
-            # imagen.save(f"static/LawyerImages/{imagen}")
+            image.save(os.path.join("static", lawyer_data['image']))
             # print("image save")
             return redirect(url_for('lawyerlogin'))
 
-    return render_template('lawyerreg.html')
+    return render_template('lawyerlogin.html')
 
 @app.route('/lawyerlogin', methods=['POST','GET'])
 def lawyerlogin():
@@ -190,6 +194,7 @@ def findlawyer():
                 address_ratio = fuzz.partial_ratio(query.lower(), lawyer['address'].lower())
                 if name_ratio >= 80 or address_ratio >= 80:
                     results.append(lawyer)
+            print(results)
         else:
             # It's a booking request
             client_name = request.form.get('clientName')

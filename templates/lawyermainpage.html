@@ -1,68 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>login as lawyer</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            margin-bottom: 20px;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        strong {
-            font-weight: bold;
-        }
-        
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #bb4646;
+        background: url("https://img.freepik.com/premium-photo/businessman-silhouette-sitting-office-thinking-anonymous-member-shadow-government_77829-9227.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+      li {
+        width: fit-content;
+      }
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #ffffff;
+        text-shadow: 0 0 10px black;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      ul {
+        margin: auto;
+        display: flex;
+        justify-content: center;
+      }
+      li {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        border: 2px solid black;
+        background-color: rgba(250, 250, 210, 0.667);
+        background-blend-mode: color-burn;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      li button {
+        margin-top: 8px;
+        border: 1px solid yellow;
+        background-color: lightgreen;
+        padding: 10px;
+        border-radius: 20px;
+      }
+      strong {
+        font-weight: bold;
+      }
     </style>
-</head>
-<body>
-        <h1>Welcome {{ email }}</h1>
-        <h1>Your Case</h1>
-        <ul>
-            {% for lawyer in lawyer_data %}
-                <li>
-                    <strong>Client Name:</strong> {{ lawyer.client_name }} <br>
-                    <strong>Client Email:</strong> {{ lawyer.client_email }} <br>
-                    <strong>Client Phone:</strong> {{ lawyer.client_phone }} <br>
-                    <strong>Lawyer Name:</strong> {{ lawyer.lawyer_name }} <br>
-                    <strong>Lawyer Email:</strong> {{ lawyer.lawyer_email }} <br>
-                    <strong>Lawyer Phone:</strong> {{ lawyer.lawyer_phone }} <br>
-                    <strong>Appointment Date and Time:</strong> {{ lawyer.appointment_datetime }} <br>
-                    <strong>Active:</strong> {{lawyer.active}} <br>
-                    <form id="markAsDoneForm_{{ lawyer._id }}" action="/lawyermainpage" method="POST">
-                        <input type="hidden" name="caseId" value="{{ lawyer._id }}">
-                        <input type="hidden" name="email" value="{{ lawyer.lawyer_email }}">
-                        <button type="submit" onclick="return confirm('Are you sure you want to mark this case as done?')">Mark as Done</button>
-                    </form>                    
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-</body>
+  </head>
+  <body>
+    <h1>Welcome {{ email }}</h1>
+    <h1>Your Case</h1>
+    <ul>
+      {% for lawyer in lawyer_data %}
+      <li>
+        <strong>Client Name:</strong> {{ lawyer.client_name }} <br />
+        <strong>Client Email:</strong> {{ lawyer.client_email }} <br />
+        <strong>Client Phone:</strong> {{ lawyer.client_phone }} <br />
+        <strong>Lawyer Name:</strong> {{ lawyer.lawyer_name }} <br />
+        <strong>Lawyer Email:</strong> {{ lawyer.lawyer_email }} <br />
+        <strong>Lawyer Phone:</strong> {{ lawyer.lawyer_phone }} <br />
+        <strong>Appointment Date and Time:</strong> {{
+        lawyer.appointment_datetime }} <br />
+
+        <strong id="act">Active: </strong> {{lawyer.active}} <br />
+        {% if (lawyer.active != 0)%}
+        <form
+          id="markAsDoneForm_{{ lawyer._id }}"
+          action="/lawyermainpage"
+          method="POST"
+        >
+          <input type="hidden" name="caseId" value="{{ lawyer._id }}" />
+          <input type="hidden" name="email" value="{{ lawyer.lawyer_email }}" />
+
+          <button
+            id="doneBtn"
+            type="submit"
+            onclick="return confirm('Are you sure you want to mark this case as done?')"
+          >
+            Mark as Done
+          </button>
+        </form>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
 </html>

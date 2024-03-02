@@ -1,168 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='sign.css') }}">
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='sign.css') }}"
+    />
     <title>LOGIn</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="forms-container">
-            <div class="signin-signup">
-                <div class="sign-in">
-                    <h2 class="title">Sign in</h2>
-                    <form action="/lawyerlogin" class="sign-in-form" method="post">
-                        <div class="input-field">
-                            <i class="fas fa-user"></i>
-                            <input type="email" id="email" name="email" placeholder="User Email" required/>
-                        </div>
-                        <div class="input-field">
-                            <i class="fas fa-lock"></i>
-                            <input type="password" id="password1" name="password" placeholder="Password" required/>
-                        </div>
-                        <p>{{ message }}</p>
-                        <div>
-                            <button type="submit" class="btn solid">SIGN IN</button>
-                            <button type="button" class="btn solid" id="togglePassword1"><i id="icon1" class="fas fa-eye"></i></button>
-                        </div>
-                        <p class="social-text">Or Sign in with social platforms</p>
-                        <div class="social-media">
-                            <a href="#" class="social-icon">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <i class="fab fa-google"></i>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                        </div>
-                    </form>
-                </div>
-                <div class="sign-up">
-                    <h2 class="title">Sign up</h2>
-                    <form action="/lawyerreg" class="sign-up-form" id="registerForm" method="post">
-                        <div class="input-field">
-                            <i class="fas fa-user"></i>
-                            <input type="text" id="name" name="name" placeholder="Name" required/>
-                        </div>
-                        <div class="input-field">
-                            <i class="fas fa-phone"></i>
-                            <input type="tel" id="phone" name="phone" placeholder="Phone no:" required/>
-                        </div>
-                        <div class="input-field">
-                            <i class="fas fa-address-book"></i>
-                            <input type="address" id="address" name="address" placeholder="Address" required />
-                        </div>
-                        <div class="input-field">
-                            <i class="fas fa-envelope"></i>
-                            <input type="email" id="email" name="email" placeholder="Email" required/>
-                        </div>
-                        <div class="input-field">
-                            <i class="fas fa-envelope"></i>
-                            <input type="department" id="department" name="department" placeholder="Department" required/>
-                        </div>
+      <div class="forms-container">
+        <div class="signin-signup">
+          <div class="sign-in">
+            <h2 class="title">Sign in</h2>
+            <form action="/lawyerlogin" class="sign-in-form" method="post">
+              <div class="input-field">
+                <i class="fas fa-user"></i>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="User Email"
+                  required
+                />
+              </div>
+              <div class="input-field">
+                <i class="fas fa-lock"></i>
+                <input
+                  type="password"
+                  id="password1"
+                  name="password"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              <p>{{ message }}</p>
+              <div>
+                <button type="submit" class="btn solid">SIGN IN</button>
+                <button type="button" class="btn solid" id="togglePassword1">
+                  <i id="icon1" class="fas fa-eye"></i>
+                </button>
+              </div>
+              <p class="social-text">Or Sign in with social platforms</p>
+              <div class="social-media">
+                <a href="#" class="social-icon">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon">
+                  <i class="fab fa-google"></i>
+                </a>
+                <a href="#" class="social-icon">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+          <div class="sign-up">
+            <h2 class="title">Sign up</h2>
+            <form
+              action="/lawyerreg"
+              class="sign-up-form"
+              id="registerForm"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <div class="input-field">
+                <i class="fas fa-user"></i>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Name"
+                  required
+                />
+              </div>
+              <div class="input-field">
+                <i class="fas fa-phone"></i>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="Phone no:"
+                  required
+                />
+              </div>
+              <div class="input-field">
+                <i class="fas fa-address-book"></i>
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  placeholder="Address"
+                  required
+                />
+              </div>
+              <div class="input-field">
+                <i class="fas fa-envelope"></i>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <div class="input-field">
+                <i class="fas fa-envelope"></i>
+                <input
+                  type="text"
+                  id="department"
+                  name="department"
+                  placeholder="Department"
+                  required
+                />
+              </div>
 
-                        <!-- <div class="input-field">
-                            <i class="fas fa-image"></i>
-                            <input type="file" id="image" name="image" />
-                        </div> -->
-                        
-                        <div class="input-field">
-                            <i class="fas fa-lock"></i>
-                            <input type="password" id="password2" name="password" placeholder="Password" required/>
-                        </div>
-                        <p>{{ message }}</p>
-                        <div>
-                            <button type="submit" class="btn solid">SIGN UP</button>
-                            <button type="button" class="btn solid" id="togglePassword2"><i id="icon2" class="fas fa-eye"></i></button>
-                        </div>
-                        <p class="social-text">Or Sign up with social platforms</p>
-                        <div class="social-media">
-                            <a href="#" class="social-icon">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <i class="fab fa-google"></i>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+              <div class="input-field">
+                <i class="fas fa-image"></i>
+                <input type="file" id="image" name="image" required />
+              </div>
 
-        <div class="panels-container">
-            <div class="panel left-panel">
-                <div class="content">
-                    <h3>New here?</h3>
-                    <p>
-                        Register in our website to enjoy our site.
-                    </p>
-                    <button class="btn transparent" id="sign-up-btn">
-                        Sign up
-                    </button>
-                </div>
-            </div>
-            <div class="panel right-panel">
-                <div class="content">
-                    <h3>One of us?</h3>
-                    <p>
-                        Already Signed Up. Then just Sign in to continue your work.
-                    </p>
-                    <button class="btn transparent" id="sign-in-btn">
-                        Sign in
-                    </button>
-                </div>
-            </div>
+              <div class="input-field">
+                <i class="fas fa-lock"></i>
+                <input
+                  type="password"
+                  id="password2"
+                  name="password"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              <p>{{ message }}</p>
+              <div>
+                <button type="submit" class="btn solid">SIGN UP</button>
+                <button type="button" class="btn solid" id="togglePassword2">
+                  <i id="icon2" class="fas fa-eye"></i>
+                </button>
+              </div>
+              <p class="social-text">Or Sign up with social platforms</p>
+              <div class="social-media">
+                <a href="#" class="social-icon">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon">
+                  <i class="fab fa-google"></i>
+                </a>
+                <a href="#" class="social-icon">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
+
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>New here?</h3>
+            <p>Register in our website to enjoy our site.</p>
+            <button class="btn transparent" id="sign-up-btn">Sign up</button>
+          </div>
+        </div>
+        <div class="panel right-panel">
+          <div class="content">
+            <h3>One of us?</h3>
+            <p>Already Signed Up. Then just Sign in to continue your work.</p>
+            <button class="btn transparent" id="sign-in-btn">Sign in</button>
+          </div>
+        </div>
+      </div>
     </div>
     <script>
-        const sign_in_btn = document.querySelector("#sign-in-btn");
-            const sign_up_btn = document.querySelector("#sign-up-btn");
-            const container = document.querySelector(".container");
-            sign_up_btn.addEventListener("click", () => {
-                container.classList.add("sign-up-mode");
-            });
-            sign_in_btn.addEventListener("click", () => {
-                container.classList.remove("sign-up-mode");
-            });
+      const sign_in_btn = document.querySelector("#sign-in-btn");
+      const sign_up_btn = document.querySelector("#sign-up-btn");
+      const container = document.querySelector(".container");
+      sign_up_btn.addEventListener("click", () => {
+        container.classList.add("sign-up-mode");
+      });
+      sign_in_btn.addEventListener("click", () => {
+        container.classList.remove("sign-up-mode");
+      });
 
-        document.getElementById("togglePassword1").addEventListener("click", function () {
-                var passwordInput = document.getElementById("password1");
-                var button = document.getElementById("togglePassword1");
-                var icon = document.getElementById("icon1");
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";    
-                icon.className = "fas fa-eye-slash"; // Change icon to hide
-            } else {
-                passwordInput.type = "password";
-                icon.className = "fas fa-eye"; // Change icon to show
-            }
+      document
+        .getElementById("togglePassword1")
+        .addEventListener("click", function () {
+          var passwordInput = document.getElementById("password1");
+          var button = document.getElementById("togglePassword1");
+          var icon = document.getElementById("icon1");
+          if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            icon.className = "fas fa-eye-slash"; // Change icon to hide
+          } else {
+            passwordInput.type = "password";
+            icon.className = "fas fa-eye"; // Change icon to show
+          }
         });
-        document.getElementById("togglePassword2").addEventListener("click", function () {
-                var passwordInput = document.getElementById("password2");
-                var button = document.getElementById("togglePassword2");
-                var icon = document.getElementById("icon2");
+      document
+        .getElementById("togglePassword2")
+        .addEventListener("click", function () {
+          var passwordInput = document.getElementById("password2");
+          var button = document.getElementById("togglePassword2");
+          var icon = document.getElementById("icon2");
 
-                if (passwordInput.type === "password") {
-                    passwordInput.type = "text";
-                    icon.className = "fas fa-eye-slash"; // Change icon to hide
-                } else {
-                    passwordInput.type = "password";
-                    icon.className = "fas fa-eye"; // Change icon to show
-                }
-            });
+          if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            icon.className = "fas fa-eye-slash"; // Change icon to hide
+          } else {
+            passwordInput.type = "password";
+            icon.className = "fas fa-eye"; // Change icon to show
+          }
+        });
     </script>
-</body>
+  </body>
 </html>
