@@ -1,0 +1,169 @@
+* {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* color: #ddd; */
+}
+
+body {
+    background: url("bg.png") no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+    overflow: hidden;
+}
+h1{
+    text-align: center;
+    align-items: center;
+    padding-bottom: 10px;
+    color: antiquewhite;
+    text-shadow: 5px 5px 20px orangered;
+    font-size: 40px;
+    font-weight: 900;
+}
+.main {
+    display: flex;
+    /* flex-wrap: wrap; */
+    align-items: center;
+    justify-content: space-around;
+    overflow: hidden;
+}
+
+#tabs {
+    max-width: 260px;
+    /* margin-right: 20px; */
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.tab {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    min-height: 80px;
+    min-width: 250px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background: rgba(105, 105, 255, 0.7);
+    backdrop-filter: blur(10px);
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
+    margin-right: 15px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+.container {
+    min-height: 90vh;
+    background: #08071d;
+    display: flex;
+    justify-content: center;
+    background: transparent;
+}
+
+.container form {
+    height: fit-content;
+    /* margin: 10px; */
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* text-align: center; */
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    flex-wrap: wrap;
+    display: none;color: #fff;
+}
+
+.container form h2 {
+    font-size: 30px;
+    display: flex;
+    color: #fff;
+    font-weight: 500;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.container form input {
+    width: 225px;
+    height: 40px;
+    padding: 4px;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    margin-bottom: 10px;
+    margin-right: 15px;
+    background: none;
+    border-bottom: 2px solid #fff;
+    color: #ddd;
+}
+#effectiveDate, #expirationDate{
+    width: 125px;
+}
+#address1, #address2{
+    width: 500px;
+}
+.container form input::placeholder, .container form textarea::placeholder {
+    color: #ddddddb9;
+}
+
+.container form h4 {
+    color: #fff;
+    font-weight: 300;
+    width: 600px;
+    margin-top: 20px;
+}
+
+.container form textarea {
+    background: none;
+    border: none;
+    border-bottom: 2px solid #fff;
+    color: #fff;
+    font-weight: 200;
+    font-size: 15px;
+    padding: 10px;
+    outline: none;
+    width: 100%;
+    height: 80px;
+}
+#extra{
+    height: 40px;
+}
+textarea::-webkit-scrollbar {
+    width: 1em;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background-color: rgba(194, 194, 194, 0.713);
+}
+
+button {
+    border: none;
+    background: #fff;
+    border-radius: 5px;
+    margin: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #333;
+    width: 100px;
+    padding: 10px;
+    /* margin-right: 500px; */
+    /* margin-bottom: 30px; */
+    transition: 0.3s;
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
+.form.active {
+    display: block;
+}
