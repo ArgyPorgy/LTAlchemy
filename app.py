@@ -20,7 +20,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def index():
-    return render_template('login.html')
+    return render_template('index.html')
 
 @app.route('/login', methods=['POST','GET'])
 def login():
@@ -61,7 +61,7 @@ def register():
             print(f"Name: {name}, Phone: {phone}, Email: {email}, Password: {password},Address: {address}")
             return render_template('login.html', message="Register go for log in")
     
-    return render_template('register.html')
+    return render_template('login.html')
 
 '''@app.route('/lawyerreg',methods=['POST','GET'])
 def lawyerregister():
@@ -129,6 +129,7 @@ def lawyerregister():
             return redirect(url_for('lawyerlogin'))
 
     return render_template('lawyerreg.html')
+
 @app.route('/lawyerlogin', methods=['POST','GET'])
 def lawyerlogin():
     if request.method == 'POST':
@@ -142,6 +143,11 @@ def lawyerlogin():
             return render_template('lawyerlogin.html', message='Invalid email or password. Please try again.')
             
     return render_template('lawyerlogin.html') 
+
+@app.route('/lawyermainpage',methods=['POST',"GET"])
+def lawyermainpage():
+    return render_template('lawyermainpage.html')
+
 
 @app.route('/list',methods=['POST',"GET"])
 def list():
