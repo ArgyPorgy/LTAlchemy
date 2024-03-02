@@ -140,8 +140,8 @@ def lawyerregister():
 @app.route('/lawyerreg',methods=['POST','GET'])
 def lawyerregister():
     if request.method == 'POST':
-        imagen = request.files['image']
-        print(imagen)
+        # imagen = request.files['image']
+        # print(imagen)
         lawyer_data = {
             'name': request.form['name'],
             'phone': request.form['phone'],
@@ -149,7 +149,7 @@ def lawyerregister():
             'address': request.form['address'],
             'department': request.form['department'],
             'password': request.form['password'],
-            'image': imagen,
+            # 'image': imagen,
         }
 
         existing_user = lawyercollection.find_one({'email': lawyer_data['email']})
@@ -159,8 +159,8 @@ def lawyerregister():
             
         else:
             lawyercollection.insert_one(lawyer_data)
-            imagen.save(f"static/LawyerImages/{imagen}")
-            print("image save")
+            # imagen.save(f"static/LawyerImages/{imagen}")
+            # print("image save")
             return redirect(url_for('lawyerlogin'))
 
     return render_template('lawyerreg.html')
