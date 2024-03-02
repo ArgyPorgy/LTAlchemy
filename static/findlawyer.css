@@ -1,0 +1,179 @@
+
+.appointment-form {
+    display: none;
+}
+.search-form {
+    display: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#searchLawyerForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#searchLawyerForm label {
+    margin-bottom: 10px;
+}
+
+#searchLawyerForm input[type="text"] {
+    width: 300px; /* Adjust width as needed */
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#searchLawyerForm button {
+    background-color: #007bff; /* Blue button color */
+    color: #fff; /* White text color */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#searchLawyerForm button:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #333; /* Dark gray text color */
+}
+
+#searchForm {
+    margin-bottom: 20px;
+}
+
+#results {
+    margin-bottom: 30px;
+}
+
+.book-appointment-btn {
+    background-color: #007bff; /* Blue button color */
+    color: #fff; /* White text color */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.book-appointment-btn:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+}
+
+.appointment-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    display: none; /* Hide by default */
+}
+
+.appointment-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333; /* Dark gray text color */
+}
+
+.appointment-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333; /* Dark gray text color */
+}
+
+.appointment-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.appointment-form button {
+    width: 100%;
+    background-color: #28a745; /* Green button color */
+    color: #fff; /* White text color */
+    border: none;
+    padding: 10px 0;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.appointment-form button:hover {
+    background-color: #218838; /* Darker green color on hover */
+}
+
+#searchButton:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+}
+#searchButton {
+    display: block;
+    margin: 0 auto;
+    background-color: #007bff; /* Blue button color */
+    color: #fff; /* White text color */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#searchButton:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+}
+
+#results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #f8f9fa; /* Light gray background color */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+#results > div {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff; /* White background color for each detail section */
+    border-radius: 8px;
+}
+
+#results > div:last-child {
+    margin-bottom: 0; /* Remove bottom margin for the last div */
+}
+
+.book-appointment-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.book-appointment-btn:hover {
+    background-color: #0056b3;
+}

@@ -4,7 +4,7 @@ from fuzzywuzzy import fuzz
 from datetime import datetime
 import os
 from dotenv import load_dotenv
-# from bson import ObjectId
+from bson import ObjectId
 load_dotenv()
 app = Flask(__name__)
 mc = os.environ.get('mongoClient')
@@ -143,9 +143,64 @@ def lawyerlogin():
             return render_template('lawyerlogin.html', message='Invalid email or password. Please try again.')
             
     return render_template('lawyerlogin.html') 
+@app.route('/findlawyer', methods=['POST','GET'])
+def findlawyer():
+    results = []
+    
+    if request.method == 'POST':
+        # Check if it's a search request
+        query = request.form.get('query')
+        if query:
+            for lawyer in lawyercollection.find():
+                name_ratio = fuzz.partial_ratio(query.lower(), lawyer['name'].lower())
+                address_ratio = fuzz.partial_ratio(query.lower(), lawyer['address'].lower())
+                if name_ratio >= 80 or address_ratio >= 80:
+                    results.append(lawyer)
+        else:
+            # It's a booking request
+            client_name = request.form.get('clientName')
+            client_email = request.form.get('clientEmail')
+            client_phone = request.form.get('clientPhone')
+            lawyer_name = request.form.get('lawyerName')
+            lawyer_email = request.form.get('lawyerEmail')
+            lawyer_phone = request.form.get('lawyerPhone')
+
+            current_datetime = datetime.now()
+
+            # Convert date object to datetime object
+            appointment_date = current_datetime
+
+            booking_details = {
+                'client_name': client_name,
+                'client_email': client_email,
+                'client_phone': client_phone,
+                'lawyer_name': lawyer_name,
+                'lawyer_email': lawyer_email,
+                'lawyer_phone': lawyer_phone,
+                'appointment_datetime': appointment_date,
+                'active': "1",
+            }
+            print(booking_details)
+            bookingcollection.insert_one(booking_details)
+
+    return render_template('findlawyer.html', results=results)
 
 @app.route('/lawyermainpage',methods=['POST',"GET"])
 def lawyermainpage():
+    if request.method == 'GET':
+        email = request.args.get('email')
+        # Retrieve data for the lawyer using the email parameter
+        lawyer_data = bookingcollection.find({'lawyer_email': email})
+        return render_template('lawyermainpage.html', email=email, lawyer_data=lawyer_data)
+
+    elif request.method == 'POST':
+        case_id = request.form.get('caseId')
+        email = request.form.get('email')
+        print(case_id)
+        bookingcollection.update_one({'_id': ObjectId(case_id)}, {'$set': {'active': "0"}})
+
+        lawyer_data = bookingcollection.find({'lawyer_email': email})
+        return render_template('lawyermainpage.html', email=email, lawyer_data=lawyer_data)
     return render_template('lawyermainpage.html')
 
 
