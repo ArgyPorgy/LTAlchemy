@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.chatbot-toggler {
+  position: fixed;
+  bottom: 30px;
+  right: 35px;
+  outline: none;
+  border: none;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #724ae8;
+  transition: all 0.2s ease;
+}
+
+body.show-chatbot .chatbot-toggler {
+  transform: rotate(90deg);
+}
+.chatbot, .chatbot-toggler{
+    z-index: 9090;
+}
+
+.pdfStat{
+  display: flex;
+  position: absolute;
+  right: 5px;
+  bottom: 65px;
+  
+}
+.pdfStat span
+{
+  border: 2px solid;
+  border-radius: 50%;
+  width: 15px;
+  transition: all 1s;
+  height: 15px;
+  margin-right: 5px;
+  
+}
