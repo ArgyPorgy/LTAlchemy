@@ -6,7 +6,7 @@ const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
 
 let userMessage = null; // Variable to store user's message
-const API_KEY = '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' ; // Paste your API key here
+const API_KEY = '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' ; // Paste your API key here
 const inputInitHeight = chatInput.scrollHeight;
 
 
@@ -83,6 +83,7 @@ const createChatLiWithInput = (className) => {
 function scanPDF(){
 chatInput.value = "";
 document.querySelector(".cmdContainer").innerHTML = "";
+
 chatbox.appendChild(createChatLi("/scanPDF", "outgoing"));
 setTimeout(() => {
     chatbox.appendChild(createChatLiWithInput("incoming"));
@@ -100,12 +101,28 @@ function About(){
 }
 function showHelp() {
     alert("help");
-    chatInput.value = "/Help";
-    createChatLi("/Help", "chat outgoing");
-    createChatLi(
+    chatInput.value = "";
+    document.querySelector(".cmdContainer").innerHTML = "";
+    chatbox.appendChild(createChatLi("/Help", "outgoing"));
+    chatbox.appendChild(createChatLi(
       "Hello! I am an AI bot trained to handle data regarding legal documents and law. ",
-      "chat incoming"
-    );
+      "incoming"
+    ));
+    const summary =`
+    The features of this website are: \n
+1. Create Business Contracts: Generate tailored contracts by selecting document types like Contracts & Agreements, Real Estate Plannings, Regulatory Compliance, Intellectual Properties, and Formation & Governance.\n
+
+2. Legal AI Chatbot - Dexter: Get answers to legal questions and assistance with business-related legal documents through Dexter, our knowledgeable AI chatbot.
+3. Find Certified Lawyers Nearby: Explore a database to locate certified lawyers in your vicinity, ensuring access to specialized legal expertise for your business needs. \n
+4. Consultation with Lawyers: Schedule direct consultations with certified lawyers for personalized legal support, clarifying doubts, seeking advice, or addressing complex legal matters.\n
+5. Chatbot Commands Simplification: Press "/" to access a menu of commands, streamlining interactions and providing quick navigation for creating contracts, consulting lawyers, and accessing essential features. \n
+
+`;
+setTimeout(() => {
+    chatbox.appendChild(createChatLi(summary,"incoming"));
+}, 1200);
+
+
   }
 function checkCMD() {
     const cmd = document.querySelector(".cmdContainer");

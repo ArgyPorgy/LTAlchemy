@@ -1,5 +1,7 @@
-from flask import Flask, render_template,request,redirect,url_for
+from flask import Flask, render_template,request,redirect,url_for, session, jsonify
 from pymongo import MongoClient
+import uuid
+import PyPDF2
 from fuzzywuzzy import fuzz
 from datetime import datetime
 import os
@@ -16,7 +18,7 @@ bookingcollection = db['Booking Details']
 
 UPLOAD_FOLDER = os.path.join('static', 'LawyerImages')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
+app.config['SECRET_KEY'] = 'snedit'
 
 @app.route('/')
 def index():
@@ -246,9 +248,7 @@ def lawyermainpage():
     return render_template('lawyermainpage.html')
 
 
-@app.route('/list',methods=['POST',"GET"])
-def list():
-    return render_template('list.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
