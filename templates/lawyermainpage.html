@@ -3,9 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lawyer Main page</title>
+    <title>login as lawyer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        strong {
+            font-weight: bold;
+        }
+        
+    </style>
 </head>
 <body>
-    
+        <h1>Welcome {{ email }}</h1>
+        <h1>Your Case</h1>
+        <ul>
+            {% for lawyer in lawyer_data %}
+                <li>
+                    <strong>Client Name:</strong> {{ lawyer.client_name }} <br>
+                    <strong>Client Email:</strong> {{ lawyer.client_email }} <br>
+                    <strong>Client Phone:</strong> {{ lawyer.client_phone }} <br>
+                    <strong>Lawyer Name:</strong> {{ lawyer.lawyer_name }} <br>
+                    <strong>Lawyer Email:</strong> {{ lawyer.lawyer_email }} <br>
+                    <strong>Lawyer Phone:</strong> {{ lawyer.lawyer_phone }} <br>
+                    <strong>Appointment Date and Time:</strong> {{ lawyer.appointment_datetime }} <br>
+                    <strong>Active:</strong> {{lawyer.active}} <br>
+                    <form id="markAsDoneForm_{{ lawyer._id }}" action="/lawyermainpage" method="POST">
+                        <input type="hidden" name="caseId" value="{{ lawyer._id }}">
+                        <input type="hidden" name="email" value="{{ lawyer.lawyer_email }}">
+                        <button type="submit" onclick="return confirm('Are you sure you want to mark this case as done?')">Mark as Done</button>
+                    </form>                    
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>

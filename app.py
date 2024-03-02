@@ -135,6 +135,7 @@ def lawyerregister():
     return render_template('lawyerreg.html') 
 
 '''
+@app.route('/lawyerreg',methods=['POST','GET'])
 def lawyerregister():
     if request.method == 'POST':
         name = request.form['name']
@@ -233,7 +234,6 @@ def findlawyer():
 def lawyermainpage():
     if request.method == 'GET':
         email = request.args.get('email')
-        # Retrieve data for the lawyer using the email parameter
         lawyer_data = bookingcollection.find({'lawyer_email': email})
         return render_template('lawyermainpage.html', email=email, lawyer_data=lawyer_data)
 
