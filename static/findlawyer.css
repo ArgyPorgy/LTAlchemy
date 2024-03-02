@@ -1,6 +1,15 @@
-
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: url('https://wallpapercosmos.com/w/full/a/0/3/900420-3840x2160-desktop-4k-lawyer-wallpaper-photo.jpg');
+}
 .appointment-form {
     display: none;
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
 }
 .search-form {
     display: none;
@@ -59,7 +68,11 @@ h1 {
 }
 
 #results {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+    display: flex;
+    width: fit-content;
+    margin: auto;
+    background: transparent;
 }
 
 .book-appointment-btn {
@@ -141,21 +154,24 @@ h1 {
 
 #results {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    background-color: #f8f9fa; /* Light gray background color */
-    padding: 20px;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    justify-content: space-around;
+    
+    /* margin-top: 20px; */
+    background-color: #f7ee8a; 
+    border: 3px solid rgb(255, 183, 0);
+    /* padding: 20px; */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
 }
 
 #results > div {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 20px;
-    background-color: #fff; /* White background color for each detail section */
+    background-color: #f7ee8a; 
+     /* White background color for each detail section */
     border-radius: 8px;
 }
 

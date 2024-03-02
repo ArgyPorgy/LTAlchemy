@@ -92,6 +92,18 @@ setTimeout(() => {
 }, 1200);
 
 }
+document.querySelector("#St").addEventListener("click", ()=>{
+document.getElementsByClassName("chatbot-toggler")[0].click();
+chatbox.value = "/scanPDF";
+chatbox.appendChild(createChatLi("/scanPDF", "outgoing"));
+setTimeout(() => {
+    chatbox.value = "";
+    chatbox.appendChild(createChatLiWithInput("incoming"));
+}, 1200);
+});
+document.querySelector("#St").addEventListener("click", ()=>{
+window.href("/findlawyer")
+});
 function Locate(){
     chatInput.value = "";
     document.querySelector(".cmdContainer").innerHTML = "";
@@ -264,15 +276,15 @@ sendChatBtn.addEventListener("click", handleChat);
 closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
 chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
 
-const fs = require('fs');
-const { UnstructuredPDFLoader } = require('langchain').document_loaders;
-const { RecursiveCharacterTextSplitter } = require('langchain').text_splitter;
-const { HuggingFaceInferenceAPIEmbeddings } = require('langchain').embeddings;
-const { Chroma } = require('langchain').vectorstores;
-const { HuggingFaceEndpoint } = require('langchain_core').endpoints.huggingface;
-const { ChatPromptTemplate, StrOutputParser } = require('langchain_core').prompts;
-const { RunnablePassthrough } = require('langchain_core').runnables;
-const { BM25Retriever, EnsembleRetriever } = require('langchain').retrievers;
+// const fs = require('fs');
+// const { UnstructuredPDFLoader } = require('langchain').document_loaders;
+// const { RecursiveCharacterTextSplitter } = require('langchain').text_splitter;
+// const { HuggingFaceInferenceAPIEmbeddings } = require('langchain').embeddings;
+// const { Chroma } = require('langchain').vectorstores;
+// const { HuggingFaceEndpoint } = require('langchain_core').endpoints.huggingface;
+// const { ChatPromptTemplate, StrOutputParser } = require('langchain_core').prompts;
+// const { RunnablePassthrough } = require('langchain_core').runnables;
+// const { BM25Retriever, EnsembleRetriever } = require('langchain').retrievers;
 
 const generateResponse = async () => {
     const HF_TOKEN = "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";
@@ -342,4 +354,4 @@ const generateResponse = async () => {
     console.log(responses);
 }
 
-generateResponse();
+// generateResponse();
