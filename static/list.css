@@ -7,7 +7,7 @@
 }
 
 body {
-    background: url("bg.png") no-repeat center center/cover;
+    background: url("wp2162938.webp") no-repeat center center/cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,8 +18,9 @@ h1{
     text-align: center;
     align-items: center;
     padding-bottom: 10px;
-    color: antiquewhite;
-    text-shadow: 5px 5px 20px orangered;
+    color: black;
+    text-shadow: 5px 5px 20px red;
+    /* backdrop-filter: blur(10px); */
     font-size: 40px;
     font-weight: 900;
 }
@@ -30,7 +31,25 @@ h1{
     justify-content: space-around;
     overflow: hidden;
 }
+.s {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
 
+.t {
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    min-height: 80px;
+    border-radius: 25px;
+    width: 120px;
+    background:linear-gradient(grey, brown);
+    border: 3px ridge orangered;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
+    /* border: none; */
+}
 #tabs {
     max-width: 260px;
     /* margin-right: 20px; */
@@ -50,11 +69,15 @@ h1{
     min-width: 250px;
     padding: 10px;
     margin-bottom: 15px;
-    background: rgba(105, 105, 255, 0.7);
+    background: brown;
     backdrop-filter: blur(10px);
+    border: 5px ridge orangered;
     box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
     border-radius: 25px;
     margin-right: 15px;
+}
+.tab:hover{
+    background: goldenrod
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
@@ -77,19 +100,22 @@ h1{
     align-items: center;
     /* text-align: center; */
     box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
-    border-radius: 15px;background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
     flex-wrap: wrap;
-    display: none;color: #fff;
+    display: none;
+    color: #fff;
 }
 
 .container form h2 {
     font-size: 30px;
     display: flex;
-    color: #fff;
-    font-weight: 500;
+    color: bisque;
+    font-weight: 900;
     margin-top: 5px;
     margin-bottom: 15px;
+    text-shadow: 5px 5px 20px black;
 }
 
 .container form input {
@@ -103,7 +129,7 @@ h1{
     margin-right: 15px;
     background: none;
     border-bottom: 2px solid #fff;
-    color: #ddd;
+    color: white;
 }
 #effectiveDate, #expirationDate{
     width: 125px;
@@ -112,7 +138,7 @@ h1{
     width: 500px;
 }
 .container form input::placeholder, .container form textarea::placeholder {
-    color: #ddddddb9;
+    color: white;
 }
 
 .container form h4 {
@@ -145,14 +171,14 @@ textarea::-webkit-scrollbar-thumb {
     background-color: rgba(194, 194, 194, 0.713);
 }
 
-button {
+.form button {
     border: none;
-    background: #fff;
+    background: brown;
     border-radius: 5px;
     margin: 10px;
     font-weight: 600;
     font-size: 20px;
-    color: #333;
+    color: #000;
     width: 100px;
     padding: 10px;
     /* margin-right: 500px; */
@@ -161,7 +187,8 @@ button {
 }
 
 button:hover {
-    opacity: 0.7;
+    /* opacity: 0.9; */
+    background:linear-gradient(brown, goldenrod);
 }
 
 .form.active {

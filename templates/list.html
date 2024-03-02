@@ -78,12 +78,13 @@
           </div>
         </div>
         <div>
-          <div class="tab" onclick="openForm(5)">
-            <h4>Formation & Governance</h4>
-          </div>
-          <div class="tab" onclick="openForm(6)">
-            <h4>Advocates or Lawyers Details</h4>
-          </div>
+            <div class="tab" onclick="openForm(5)">
+                <h4>Formation & Governance</h4>
+            </div>
+            <div class="s">
+                <button class="t"><h4>Locate Lawyers</h4></button>
+                <button class="t"><h4>Scan pdf</h4></button>
+            </div>
         </div>
       </div>
 
@@ -592,11 +593,11 @@
         var tabs = document.getElementsByClassName("tab");
         for (var i = 0; i < tabs.length; i++) {
           tabs[i].style.marginLeft = "0";
-          tabs[i].style.background = "rgba(0, 0, 255, 0.7)";
+          tabs[i].style.background = "brown";
         }
         tabs[tabIndex - 1].style.marginLeft = "20px";
         tabs[tabIndex - 1].style.marginBottom = "10px";
-        tabs[tabIndex - 1].style.background = "rgba(255, 255, 255, 0.7)";
+        tabs[tabIndex - 1].style.background = "goldenrod";
       }
     </script>
   </body>
