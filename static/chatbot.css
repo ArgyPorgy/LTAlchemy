@@ -48,6 +48,9 @@ body.show-chatbot .chatbot-toggler {
   margin-right: 5px;
   
 }
+.incoming input{
+  width: 90%;
+}
 #r{
   border: 3px solid red;
   box-shadow: 0 0 4px red;
@@ -129,12 +132,16 @@ opacity: 0;
   transition: all 1s;
   background-color: rgb(146, 146, 244);
   font-size: medium;
+  border-radius: 15px;
+  color: white;
+  margin-top: 6px;
+  padding: 5px;
   border: 1.5px solid rgb(115, 21, 162);
   box-shadow: 0 0 6px rgb(170, 0, 255);
   color: rgb(10, 10, 10);
 }
 .cmdContainer button:hover{
-  background-color: rgb(107, 19, 151);
+  background-color: rgb(134, 23, 189);
   box-shadow: 0 0 6px purple;
   color: white;
   cursor: pointer;
@@ -265,6 +272,9 @@ header h2 {
   max-height: 180px;
   padding: 15px 15px 15px 0;
   font-size: 0.95rem;
+}
+.cmdContainer button{
+  /* color: white; */
 }
 .chat-input span {
   align-self: flex-end;
