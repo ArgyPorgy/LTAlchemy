@@ -34,6 +34,7 @@
         <p>Email: {{ result.email }}</p>
         <p>Phone Number: {{ result.phone }}</p>
         <p>Address: {{ result.address }}</p>
+        <p><a href="https://www.google.com/maps/place/{{ result.address }}" target="_blank">Click for address</a></p>
         <button
           class="book-appointment-btn"
           data-name="{{ result.name }}"
