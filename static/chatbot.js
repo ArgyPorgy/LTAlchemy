@@ -91,6 +91,12 @@ setTimeout(() => {
 
 }
 function Locate(){
+    chatInput.value = "";
+    document.querySelector(".cmdContainer").innerHTML = "";
+    chatbox.appendChild(createChatLi("/locate", "outgoing"));
+setTimeout(() => {
+    window.location.href = "/findlawyer";
+}, 1200);
 
 }
 function createDoc(){
