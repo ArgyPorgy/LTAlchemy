@@ -1,0 +1,442 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", Arial;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#section_1 {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-size: cover;
+    background-position: center;
+    background: linear-gradient(purple, darkviolet)
+}
+
+header {
+    position: relative;
+    top: 0;
+    width: 100%;
+    padding: 30px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 1s;
+}
+
+header .logo {
+    position: relative;
+    color: white;
+    font-size: 35px;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+header .nav a {
+    color: antiquewhite;
+    background: linear-gradient(darkblue, rgb(58, 39, 4));
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 2px 15px;
+    border-radius: 20px;
+    transition-property: background;
+    transition-property: transform;
+}
+
+header .nav a:not(:last-child) {
+    margin-right: 30px;
+}
+
+header .nav a:hover {
+    background: #fff;
+    background: linear-gradient(darkblue, crimson);
+    transform: scale(1.8);
+}
+
+.container {
+    height: 100vh;
+    margin: 30px 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.container .content {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    width: 800px;
+    padding: 20px 20px;
+    border-radius: 50px;
+}
+
+.container .content h2,
+.intro h2 {
+    color: orange;
+    font-size: 35px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    line-height: 60px;
+    margin-bottom: 30px;
+}
+
+.container .content h2 span {
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    font-weight: 800px;
+    text-shadow: 0 0 10px orangered;
+}
+
+.specialH2 {
+    color: orangered;
+    text-shadow: none;
+}
+
+.container .content p,
+.intro p {
+    font-size: 25px;
+    font-weight: 400;
+    color: white;
+}
+
+label {
+    display: none;
+    margin-right: 20px;
+}
+
+.marquee {
+    display: flex;
+    justify-content: flex-start;
+    background-color: #000000;
+    overflow: hidden;
+}
+
+.marquee h2 {
+    font-size: 30px;
+    color: transparent;
+    font-weight: 800;
+    -webkit-text-stroke-width: 0.4px;
+    -webkit-text-stroke-color: #fff;
+    white-space: nowrap;
+    letter-spacing: 1.5px;
+    animation: move 9s linear infinite;
+}
+
+@keyframes move {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+#section_2 {
+    padding-bottom: 100px;
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: black;
+    background-size: contain;
+    color: #fff;
+    overflow: hidden;
+}
+
+#section_2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(darkviolet, darkblue);
+    border-radius: 0 0 100% 100%/0 0 100% 100%;
+}
+
+.login,
+.about {
+    margin: 30px 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.box {
+    padding: 40px 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 20px;
+    max-width: 450px;
+    box-shadow: 0 10px 52px black;
+}
+
+.box::before {
+    content: "";
+    position: absolute;
+    width: 500%;
+    height: 50%;
+    background: linear-gradient(blue, orange);
+    animation: animate 4s linear infinite;
+}
+
+.box h2,
+.box p {
+    position: relative;
+    color: #fff;
+    z-index: 10;
+}
+
+.box::after {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    background: linear-gradient(rgba(0, 0, 0), darkviolet);
+    border-radius: 14px;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.button {
+    z-index: 10;
+    padding-top: 10px;
+}
+
+button {
+    padding: 10px 10px 10px 10px;
+    color: white;
+    font-size: 15px;
+    background: darkmagenta;
+    border: 3px solid orange;
+    border-radius: 35px;
+    min-width: 200px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: linear-gradient(darkblue, darkviolet);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+
+#section_3 {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    color: #fff;
+    overflow-x: hidden;
+    background-color: #000000;
+}
+
+.intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 15px;
+    width: 90vw;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10%;
+}
+
+.intro p {
+    color: chartreuse;
+}
+
+.about {
+    width: 100%;
+}
+
+.holder {
+    display: grid;
+    grid-auto-flow: column;
+    scroll-behavior: auto;
+    gap: 1.2rem;
+    overflow-y: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin: 0;
+}
+
+.holder::-webkit-scrollbar {
+    display: none;
+}
+
+.card {
+    margin: 0;
+    position: relative;
+    scroll-snap-align: start;
+    border-radius: 20px;
+    height: 400px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.profile {
+    width: 300px;
+    background: rgb(58, 58, 232);
+    padding: 30px;
+    border-radius: 10px;
+    bottom: 0;
+    box-shadow: 10px 10px 10px 5px black;
+    z-index: 1;
+    transition: transform .7s;
+}
+
+.pic {
+    margin: -90px auto 0;
+}
+
+.pic img {
+    border: 5px solid black;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.profile h3 {
+    margin-top: 10px;
+    color: bisque;
+    text-shadow: 0 0 10px orangered;
+}
+
+.s1 {
+    height: 100px;
+    width: 64%;
+    background: rgb(155, 155, 255);
+    position: absolute;
+    border-radius: 10px;
+    bottom: 25%;
+    left: 18%;
+    z-index: -0.3;
+    box-shadow: 0 0 20px -15px black;
+    transition: transform .7s;
+}
+
+.s2 {
+    height: 100px;
+    width: 80%;
+    background: rgb(97, 97, 165);
+    position: absolute;
+    border-radius: 10px;
+    bottom: 30%;
+    box-shadow: 0 0 20px -15px black;
+    transition: transform .7s;
+}
+
+.card:hover .profile {
+    transform: translateY(-31px);
+}
+
+.card:hover .s1 {
+    transform: translateY(-10px);
+}
+
+.photo {
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 5%;
+}
+
+.photo svg {
+    object-fit: cover;
+    width: 500px;
+    float: right;
+}
+
+
+button :hover {
+    transition: all 2s;
+}
+
+body {
+    scroll-behavior: smooth;
+    scrollbar-color: blue rgb(0, 0, 108);
+}
+
+.logo {
+    border: 2px solid white;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 1s;
+}
+
+.logo:hover {
+    color: black;
+    background-color: white;
+    transition: all 1s;
+}
+
+button {
+    transition: all 1s;
+}
+
+.photo img {
+    filter: contrast(130%) saturate(120%);
+}
+.profile p{
+    margin-bottom: 10px;
+}
+.social-media {
+    display: flex;
+    justify-content: center;
+}
+.social-icon{
+    height: 40px;
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0.25rem;
+    color: black;
+    border-radius: 50%;
+    border: 2px solid green;
+    text-decoration: none;
+    font-size: 1.0rem;
+    transition: 0.3s;
+}
+.social-icon:hover {
+    color: red;
+    border-color: red;
+}
