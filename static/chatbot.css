@@ -48,3 +48,70 @@ body.show-chatbot .chatbot-toggler {
   margin-right: 5px;
   
 }
+#r{
+  border: 3px solid red;
+  box-shadow: 0 0 4px red;
+  background-color: rgb(247, 53, 53);
+  position: relative; 
+}
+#r:hover::before {
+  content: "PDF not active";
+  position: absolute;
+  top: -40px; /* Adjust the distance above the span */
+  left: 50%; /* Center the tooltip horizontally */
+  transform: translateX(-50%); /* Center the tooltip horizontally */
+  background-color: #e34949; /* Background color for the tooltip */
+  color: #fff7f7; /* Text color for the tooltip */
+  padding: 5px;
+  border: 1px solid #ccc; /* Border for the tooltip */
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle box shadow */
+  z-index: 1; /* Ensure the tooltip is above other elements */
+  display: block;
+  white-space: nowrap; /* Prevent line breaks in the tooltip */
+}
+#y{
+  border: 3px solid yellow;
+  box-shadow: 0 0 4px gold;
+  position: relative; 
+}
+#y:hover::before {
+  content: "PDF is processing";
+  position: absolute;
+  top: -40px; /* Adjust the distance above the span */
+  left: 50%; /* Center the tooltip horizontally */
+  transform: translateX(-75%); /* Center the tooltip horizontally */
+  background-color: #ddd41a; /* Background color for the tooltip */
+  color: #ffffff; /* Text color for the tooltip */
+  padding: 5px;
+  border: 1px solid #ccc; /* Border for the tooltip */
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle box shadow */
+  z-index: 1; /* Ensure the tooltip is above other elements */
+  display: block;
+  white-space: nowrap; /* Prevent line breaks in the tooltip */
+}
+
+
+#g{
+  border: 3px solid green;
+  box-shadow: 0 0 4px lightgreen;
+  position: relative; 
+}
+#g:hover::before {
+  content: "PDF is active";
+  position: absolute;
+  
+  top: -40px; /* Adjust the distance above the span */
+  left: 60%; /* Center the tooltip horizontally */
+  transform: translateX(-88%); /* Center the tooltip horizontally */
+  background-color: #6ae349; /* Background color for the tooltip */
+  color: #ffffff; /* Text color for the tooltip */
+  padding: 5px;
+  border: 1px solid #ccc; /* Border for the tooltip */
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle box shadow */
+  z-index: 1; /* Ensure the tooltip is above other elements */
+  display: block;
+  white-space: nowrap; /* Prevent line breaks in the tooltip */
+}
