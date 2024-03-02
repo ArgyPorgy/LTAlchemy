@@ -1,5 +1,8 @@
 from flask import Flask, render_template,request,redirect,url_for, jsonify,session
+from flask import Flask, render_template,request,redirect,url_for, session, jsonify
 from pymongo import MongoClient
+import uuid
+import PyPDF2
 from fuzzywuzzy import fuzz
 from datetime import datetime
 import os
