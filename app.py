@@ -36,6 +36,48 @@ def login():
             
     return render_template('login.html') 
 
+@app.route('/list',methods=['POST',"GET"])
+def list():
+    return render_template('list.html')
+
+
+def extract_text_from_pdf(file):
+    text = ""
+    pdf_reader = PyPDF2.PdfReader(file)
+    num_pages = len(pdf_reader.pages)
+
+    for page_num in range(num_pages):
+        page = pdf_reader.pages[page_num]
+        text += page.extract_text()
+
+    return text
+
+
+@app.route('/upload_pdf', methods=['POST'])
+def upload_pdf():
+    try:
+        file = request.files['pdfFile']
+        if file:
+            session_id = str(uuid.uuid4())
+            file_path = f'temporary/{session_id}.pdf'
+            file.save(file_path)
+            print(extract_text_from_pdf(file))
+            data = extract_text_from_pdf(file)
+
+            # Perform PDF processing logic (extract text, etc.)
+            # For simplicity, let's just print a success message
+            print("PDF uploaded successfully")
+            session['pdfPath'] = file_path
+            
+            return jsonify({'success': True, 'message': 'PDF uploaded successfully', 'pdfName': file_path, 'data': data})
+        
+        else:
+            return jsonify({'success': False, 'message': 'No file uploaded'})
+
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)})
+
+
 @app.route('/register',methods=['POST','GET'])
 def register():
     if request.method == 'POST':
