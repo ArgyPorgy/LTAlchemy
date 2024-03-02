@@ -1,11 +1,603 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lawyer Page</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabbed Form</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='list.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='chatbot.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"
+    />
+    <!-- <link rel="stylesheet" href="list.css"> -->
+  </head>
+
+  <body>
+    <h1>LEGAL DOCUMENTS</h1>
+
+    <button class="chatbot-toggler">
+      <span class="material-symbols-rounded">mode_comment</span>
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="chatbot">
+      <header>
+        <h2>Dexter</h2>
+        <span class="close-btn material-symbols-outlined">close</span>
+      </header>
+      <ul class="chatbox">
+        <li class="chat incoming">
+          <span class="material-symbols-outlined">smart_toy</span>
+          <p>Hi there 👋<br />How can I help you today?</p>
+        </li>
+      </ul>
+      <div class="cmdContainer"></div>
+      <div class="pdfStat">
+        <span id="r"></span>
+        <span id="y"></span>
+        <span id="g"></span>
+      </div>
+
+      <div class="chat-input">
+        <textarea
+          placeholder="Enter a message..."
+          spellcheck="false"
+          onkeyup="checkCMD()"
+          required
+        ></textarea>
+        <span id="send-btn" class="material-symbols-rounded">send</span>
+      </div>
+    </div>
+
+    <div class="main">
+      <div id="tabs">
+        <div>
+          <div class="tab" onclick="openForm(1)">
+            <h4>Contracts & Agreements</h4>
+          </div>
+          <div class="tab" onclick="openForm(2)">
+            <h4>Real Estate Plannings & Commercial Transactions</h4>
+          </div>
+        </div>
+        <div>
+          <div class="tab" onclick="openForm(3)">
+            <h4>Regulatory Compliance & Financial Documents</h4>
+          </div>
+          <div class="tab" onclick="openForm(4)">
+            <h4>Intellectual Properties</h4>
+          </div>
+        </div>
+        <div>
+          <div class="tab" onclick="openForm(5)">
+            <h4>Formation & Governance</h4>
+          </div>
+          <div class="tab" onclick="openForm(6)">
+            <h4>Advocates or Lawyers Details</h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- <form action="#" method="post" id="form1" class="form"> -->
+        <form id="form1" class="form">
+          <div>
+            <h2>Contracts & Agreements Form</h2>
+          </div>
+          <input
+            type="text"
+            id="party1Name"
+            name="party1Name"
+            placeholder="1st Party Name:"
+            required
+          />
+          <input
+            type="text"
+            id="party2Name"
+            name="party2Name"
+            placeholder="2nd Party Name:"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            placeholder="Email of Party 2:"
+            required
+          />
+          <input
+            type="text"
+            id="mobile"
+            placeholder="Mobile number of Party 2:"
+            required
+          />
+          <textarea
+            id="contractTerms"
+            name="contractTerms"
+            rows="4"
+            placeholder="Contract Terms:"
+          ></textarea>
+          <textarea
+            id="paymentDetails"
+            name="paymentDetails"
+            rows="4"
+            placeholder="Payment Details:"
+            required
+          ></textarea>
+          <br />
+          <label for="date">Effective Date:</label>
+          <input
+            type="date"
+            id="effectiveDate"
+            name="effectiveDate"
+            placeholder="Effective Date:"
+            required
+          />
+          <label for="date">Expiration Date:</label>
+          <input
+            type="date"
+            id="expirationDate"
+            name="expirationDate"
+            placeholder="Expiration Date:"
+          />
+          <input
+            type="text"
+            id="witnessName"
+            name="witnessName"
+            placeholder="Witness-1 Name:"
+            required
+          />
+          <input
+            type="text"
+            id="witnessName"
+            name="witnessName"
+            placeholder="Witness-2 Name:"
+            required
+          />
+          <br />
+          <label for="file">Enter necessary Documents(if any):</label>
+          <input
+            type="file"
+            id="files"
+            name="files[]"
+            multiple
+            accept=".pdf, .png, .jpg, .jpeg"
+          />
+          <textarea placeholder="OTHER IMPORTANT MESSAGE (if any)"></textarea>
+          <br />
+          <button type="button" onclick="submitForm(this)">Submit</button>
+        </form>
+        <form id="form2" class="form">
+          <h2>Real Estate Plannings & Commercial Transactions</h2>
+          <input
+            type="text"
+            id="party1Name"
+            name="party1Name"
+            placeholder="Company Name:"
+            required
+          />
+          <input
+            type="text"
+            id="party2Name"
+            name="party2Name"
+            placeholder="Real Estate Holder's Name:"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            placeholder="Email of Real Estate Holder:"
+            required
+          />
+          <input
+            type="text"
+            id="mobile"
+            placeholder="Contact number of Real Estate Holder:"
+            required
+          />
+          <input
+            type="address"
+            name="address1"
+            id="address1"
+            placeholder="Enter address of Company:"
+          />
+          <input
+            type="number"
+            name="address2"
+            id="address2"
+            placeholder="Enter address of the owned Real-Estate Property: "
+          />
+          <textarea
+            id="contractTerms"
+            name="contractTerms"
+            rows="4"
+            placeholder="Legal Descriptions and Regulatory Compliances:"
+          ></textarea>
+          <textarea
+            id="paymentDetails"
+            name="paymentDetails"
+            rows="4"
+            placeholder="Financial Informations:"
+            required
+          ></textarea>
+          <br />
+          <label for="date">Effective Date:</label>
+          <input
+            type="date"
+            id="effectiveDate"
+            name="effectiveDate"
+            placeholder="Date of Purchase:"
+            required
+          />
+          <input
+            type="text"
+            id="TIN"
+            name="TIN"
+            placeholder="TAX INDENTIFICATION NO.:"
+            required
+          />
+          <!-- <label class="placeholder" for="date">Expiration Date:</label>
+                        <input type="date" id="date" name="expirationDate" placeholder="Expiration Date:" /> -->
+          <input
+            type="text"
+            id="witnessName"
+            name="witnessName"
+            placeholder="Witness-1 Name:"
+            required
+          />
+          <input
+            type="text"
+            id="witnessName"
+            name="witnessName"
+            placeholder="Witness-2 Name:"
+            required
+          />
+          <br />
+          <label for="file"
+            >Enter the income statement and other necessary Financial
+            Documents:</label
+          >
+          <input
+            type="file"
+            id="files"
+            name="files[]"
+            multiple
+            accept=".pdf, .png, .jpg, .jpeg"
+          />
+          <textarea
+            id="extra"
+            placeholder="OTHER IMPORTANT MESSAGE (if any like risk management, etc.)"
+          ></textarea>
+          <br />
+          <button type="button" onclick="submitForm(this)">Submit</button>
+        </form>
+        <form id="form3" class="form">
+          <h2>Regulatory Compliance & Financial Documents Form</h2>
+          <input
+            type="text"
+            id="party1Name"
+            name="party1Name"
+            placeholder="Company Name:"
+            required
+          />
+          <input
+            type="text"
+            id="party2Name"
+            name="party2Name"
+            placeholder="Owner's Name:"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            placeholder="Email of Organisation:"
+            required
+          />
+          <input
+            type="text"
+            id="mobile"
+            placeholder="Contact number of Organisation:"
+            required
+          />
+          <input
+            type="address"
+            name="address1"
+            id="address1"
+            placeholder="Enter address of Company:"
+          />
+          <input
+            type="number"
+            name="address2"
+            id="address2"
+            placeholder="Enter Budget or Monetary Forecasts of the company: "
+          />
+          <textarea
+            id="contractTerms"
+            name="contractTerms"
+            rows="4"
+            placeholder="Details about Stakeholders:"
+          ></textarea>
+          <textarea
+            id="paymentDetails"
+            name="paymentDetails"
+            rows="4"
+            placeholder="Regulatory Compliance Informations:"
+            required
+          ></textarea>
+          <br />
+          <label for="date">Effective Date:</label>
+          <input
+            type="date"
+            id="effectiveDate"
+            name="effectiveDate"
+            placeholder="Effective Date:"
+            required
+          />
+          <input
+            type="text"
+            id="TIN"
+            name="TIN"
+            placeholder="TAX INDENTIFICATION NO.:"
+            required
+          />
+          <label class="placeholder" for="date">Expiration Date:</label>
+          <input
+            type="date"
+            id="date"
+            name="expirationDate"
+            placeholder="Expiration Date:"
+          />
+          <!-- <input type="text" id="witnessName" name="witnessName" placeholder="Witness-1 Name:" required />
+                        <input type="text" id="witnessName" name="witnessName" placeholder="Witness-2 Name:" required /> -->
+          <br />
+          <label for="file"
+            >Enter the income statement and other necessary Financial
+            Documents:</label
+          >
+          <input
+            type="file"
+            id="files"
+            name="files[]"
+            multiple
+            accept=".pdf, .png, .jpg, .jpeg"
+          />
+          <textarea
+            id="extra"
+            placeholder="OTHER IMPORTANT MESSAGE (if any like risk management, etc.)"
+          ></textarea>
+          <br />
+          <button type="button" onclick="submitForm(this)">Submit</button>
+        </form>
+        <form id="form4" class="form">
+          <h2>Intellectual Properties Form</h2>
+          <input
+            type="text"
+            id="party1Name"
+            name="party1Name"
+            placeholder="Company Name:"
+            required
+          />
+          <input
+            type="text"
+            id="party2Name"
+            name="party2Name"
+            placeholder="Owner's Name:"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            placeholder="Email of Owner:"
+            required
+          />
+          <input
+            type="text"
+            id="mobile"
+            placeholder="Contact number of Owner:"
+            required
+          />
+          <input
+            type="address"
+            name="address1"
+            id="address1"
+            placeholder="Enter address of Company:"
+          />
+          <input
+            type="address"
+            name="address2"
+            id="address2"
+            placeholder="Enter address of Owner"
+          />
+          <textarea
+            id="contractTerms"
+            name="contractTerms"
+            rows="4"
+            placeholder="Details about the Property:"
+          ></textarea>
+          <textarea
+            id="paymentDetails"
+            name="paymentDetails"
+            rows="4"
+            placeholder="Protection and Enforcement Measures taken:"
+            required
+          ></textarea>
+          <br />
+          <label for="date">Effective Date:</label>
+          <input
+            type="date"
+            id="effectiveDate"
+            name="effectiveDate"
+            placeholder="Creation Date:"
+            required
+          />
+          <input
+            type="text"
+            id="TIN"
+            name="TIN"
+            placeholder="TAX INDENTIFICATION NO.:"
+            required
+          />
+          <!-- <label class="placeholder" for="date">Expiration Date:</label>
+                        <input type="date" id="date" name="expirationDate" placeholder="Expiration Date:" /> -->
+          <!-- <input type="text" id="witnessName" name="witnessName" placeholder="Witness-1 Name:" required />
+                        <input type="text" id="witnessName" name="witnessName" placeholder="Witness-2 Name:" required /> -->
+          <br />
+          <label for="file"
+            >Enter the licencing agreements and other documents:</label
+          >
+          <input
+            type="file"
+            id="files"
+            name="files[]"
+            multiple
+            accept=".pdf, .png, .jpg, .jpeg"
+          />
+          <textarea
+            id="extra"
+            placeholder="OTHER IMPORTANT MESSAGE (if any like future plans, etc.)"
+          ></textarea>
+          <br />
+          <button type="button" onclick="submitForm(this)">Submit</button>
+        </form>
+        <form id="form5" class="form">
+          <h2>Formation & Governance Form</h2>
+          <input
+            type="text"
+            id="party1Name"
+            name="party1Name"
+            placeholder="Company Name:"
+            required
+          />
+          <input
+            type="text"
+            id="party2Name"
+            name="party2Name"
+            placeholder="Partner Organisation's Name:"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            placeholder="Email of Organisation:"
+            required
+          />
+          <input
+            type="text"
+            id="mobile"
+            placeholder="Contact number of Organisation:"
+            required
+          />
+          <input
+            type="address"
+            name="address1"
+            id="address1"
+            placeholder="Enter address of Company:"
+          />
+          <input
+            type="address"
+            name="address2"
+            id="address2"
+            placeholder="Enter address of Organisation"
+          />
+          <textarea
+            id="contractTerms"
+            name="contractTerms"
+            rows="4"
+            placeholder="Details about Organisation:"
+          ></textarea>
+          <textarea
+            id="paymentDetails"
+            name="paymentDetails"
+            rows="4"
+            placeholder="Regulatory Requirements:"
+            required
+          ></textarea>
+          <br />
+          <label for="date">Effective Date:</label>
+          <input
+            type="date"
+            id="effectiveDate"
+            name="effectiveDate"
+            placeholder="Effective Date:"
+            required
+          />
+          <input
+            type="text"
+            id="TIN"
+            name="TIN"
+            placeholder="TAX INDENTIFICATION NO.:"
+            required
+          />
+          <input
+            type="text"
+            id="witnessName"
+            name="witnessName"
+            placeholder="Witness-1 Name:"
+            required
+          />
+          <input
+            type="text"
+            id="witnessName"
+            name="witnessName"
+            placeholder="Witness-2 Name:"
+            required
+          />
+          <br />
+          <label for="file"
+            >Enter the operating agreement and other necessary Document:</label
+          >
+          <input
+            type="file"
+            id="files"
+            name="files[]"
+            multiple
+            accept=".pdf, .png, .jpg, .jpeg"
+          />
+          <textarea
+            id="extra"
+            placeholder="OTHER IMPORTANT MESSAGE (if any)"
+          ></textarea>
+          <br />
+          <button type="button" onclick="submitForm(this)">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="{{url_for('static', filename = 'handlePdf.js')}}"></script>
+    <script src="{{url_for('static', filename = 'chatbot.js')}}"></script>
+    <script>
+      function openForm(tabIndex) {
+        // Get all form elements
+        var t = document.getElementById("tabs");
+        t.style.flexDirection = "column";
+        var forms = document.getElementsByClassName("form");
+
+        // Hide all forms
+        for (var i = 0; i < forms.length; i++) {
+          forms[i].classList.remove("active");
+        }
+
+        // Show the selected form
+        document.getElementById("form" + tabIndex).classList.add("active");
+
+        // Shift tabs slightly to the right
+        var tabs = document.getElementsByClassName("tab");
+        for (var i = 0; i < tabs.length; i++) {
+          tabs[i].style.marginLeft = "0";
+          tabs[i].style.background = "rgba(0, 0, 255, 0.7)";
+        }
+        tabs[tabIndex - 1].style.marginLeft = "20px";
+        tabs[tabIndex - 1].style.marginBottom = "10px";
+        tabs[tabIndex - 1].style.background = "rgba(255, 255, 255, 0.7)";
+      }
+    </script>
+  </body>
 </html>
