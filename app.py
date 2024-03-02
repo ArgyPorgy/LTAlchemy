@@ -1,10 +1,13 @@
-from flask import Flask, render_template,request,redirect,url_for
+from flask import Flask, render_template,request,redirect,url_for, jsonify,session
 from pymongo import MongoClient
 from fuzzywuzzy import fuzz
 from datetime import datetime
 import os
 from dotenv import load_dotenv
 from bson import ObjectId
+import uuid
+import PyPDF2
+
 load_dotenv()
 app = Flask(__name__)
 mc = os.environ.get('mongoClient')
@@ -13,9 +16,6 @@ db=client.get_database('Hacknitr')
 collection = db['Login']
 lawyercollection = db['Lawyer Login']
 bookingcollection = db['Booking Details']
-
-UPLOAD_FOLDER = os.path.join('static', 'LawyerImages')
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 @app.route('/')
@@ -136,39 +136,27 @@ def lawyerregister():
 @app.route('/lawyerreg',methods=['POST','GET'])
 def lawyerregister():
     if request.method == 'POST':
-        name = request.form['name']
-        phone = request.form['phone']
-        email = request.form['email']
-        address = request.form['address']
-        password = request.form['password']
-        
-        # Handle image upload
-        if 'image' in request.files:
-            image = request.files['image']
-            if image.filename != '':
-                filename = image.filename
-                image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                image.save(image_path)
-            else:
-                filename = None
-        else:
-            filename = None
-        
-        existing_user = lawyercollection.find_one({'email': email})
+        imagen = request.files['image']
+        print(imagen)
+        lawyer_data = {
+            'name': request.form['name'],
+            'phone': request.form['phone'],
+            'email': request.form['email'],
+            'address': request.form['address'],
+            'department': request.form['department'],
+            'password': request.form['password'],
+            'image': imagen,
+        }
+
+        existing_user = lawyercollection.find_one({'email': lawyer_data['email']})
         if existing_user:
             message = "User already exists. Please login."
             return render_template('lawyerreg.html', message=message)
             
         else:
-            logindata = {
-                'name': name,
-                'phone': phone,
-                'address': address,
-                'email': email,
-                'password': password,
-                'image': filename  # Store the image filename in MongoDB
-            }
-            lawyercollection.insert_one(logindata)
+            lawyercollection.insert_one(lawyer_data)
+            imagen.save(f"static/LawyerImages/{imagen}")
+            print("image save")
             return redirect(url_for('lawyerlogin'))
 
     return render_template('lawyerreg.html')
@@ -244,11 +232,6 @@ def lawyermainpage():
         lawyer_data = bookingcollection.find({'lawyer_email': email})
         return render_template('lawyermainpage.html', email=email, lawyer_data=lawyer_data)
     return render_template('lawyermainpage.html')
-
-
-@app.route('/list',methods=['POST',"GET"])
-def list():
-    return render_template('list.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
