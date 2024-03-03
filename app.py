@@ -1,5 +1,4 @@
-from flask import Flask, render_template,request,redirect,url_for, jsonify,session
-from flask import Flask, render_template,request,redirect,url_for, session, jsonify
+from flask import Flask, render_template,request,redirect,url_for, session, jsonify, send_file
 from pymongo import MongoClient
 import uuid
 import PyPDF2
@@ -11,20 +10,88 @@ from bson import ObjectId
 import uuid
 import webbrowser
 import PyPDF2
+import openai
+from fpdf import FPDF
+import io
 
 load_dotenv()
 app = Flask(__name__)
+opAPI = os.environ.get("openAI")
+openai.api_key = opAPI
 mc = os.environ.get('mongoClient')
 client = MongoClient(mc)
 db=client.get_database('Hacknitr')
 collection = db['Login']
 lawyercollection = db['Lawyer Login']
 bookingcollection = db['Booking Details']
-
+app.config['secret_key']  = 'asfiabfasbfj'
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+def chat_gpt(prompt):
+    response = openai.ChatCompletion.create(
+        model = "gpt-3.5-turbo",
+     
+        messages = [{"role" : "user", "content":prompt}]
+    )
+    return response.choices[0].message.content.strip()
+
+def create_pdf(text):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+
+    # Set left margin (adjust as needed)
+    pdf.set_left_margin(10)
+
+    # Split the text into lines
+    lines = text.split('\n')
+
+    for line in lines:
+        # Use MultiCell for automatic word wrapping
+        pdf.multi_cell(0, 10, txt=line)  # '0' means auto width, '10' is line height
+
+    pdf_output = pdf.output(dest='S').encode('latin1')
+    return io.BytesIO(pdf_output)
+
+@app.route('/receive_data', methods=['POST'])
+def receive_data():
+    types = ["Contracts & Agreements", "Real Estate Plannings & Commercial Transactions", "Regulatory Compliance & Financial Documents", "Intellectual Properties", "Formation & Governance"]
+
+    data = request.get_json()
+    received_string = data['string']
+    print(received_string)
+    for char in received_string:
+    # Check if the character is numeric
+        if char.isdigit():
+            # Extract the first numeric character
+            index = int(char)
+            break
+    
+
+    Btype = types[index-1]
+    print(f"Received string: {received_string}")
+    # You can now process the received string as needed
+    prompt = f'''
+    Write  a formal and professional Contract of type: {Btype} with the details that i will provide.
+    Details are: 
+    [{received_string}]
+
+    your reply should strictly be the contract.'''
+
+    FinalContract = chat_gpt(prompt)
+    print(FinalContract)
+    pdf_buffer = create_pdf(FinalContract)
+    # return jsonify({'message': 'String received successfully'})
+    return send_file(
+        pdf_buffer,
+        download_name='Generated_Contract.pdf',
+        as_attachment=True,
+        mimetype='application/pdf'
+    )
 
 @app.route('/login', methods=['POST','GET'])
 def login():
@@ -109,7 +176,7 @@ def register():
     
     return render_template('login.html')
 
-'''@app.route('/lawyerreg',methods=['POST','GET'])
+@app.route('/lawyerreg',methods=['POST','GET'])
 def lawyerregister():
     if request.method == 'POST':
         name = request.form['name']
@@ -168,6 +235,7 @@ def lawyerregister():
             return redirect(url_for('lawyerlogin'))
 
     return render_template('lawyerlogin.html')
+'''
 
 @app.route('/lawyerlogin', methods=['POST','GET'])
 def lawyerlogin():
@@ -244,4 +312,4 @@ def lawyermainpage():
     return render_template('lawyermainpage.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
