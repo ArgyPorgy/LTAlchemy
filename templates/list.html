@@ -82,7 +82,9 @@
             <h4>Formation & Governance</h4>
           </div>
           <div class="s">
-            <a href="/findlawyer"><button id="Lt" class="t"><h4>Locate Lawyers</h4></button></a>
+            <a href="/findlawyer">
+              <button id="Lt" class="t"><h4>Locate Lawyers</h4></button>
+            </a>
             <button id="St" class="t"><h4>Scan pdf</h4></button>
           </div>
         </div>
@@ -174,9 +176,9 @@
           />
           <textarea placeholder="OTHER IMPORTANT MESSAGE (if any)"></textarea>
           <br />
-          <button type="button" onclick="submitForm(this)">Submit</button>
+          <button type="button" onclick="submitForm(1)">Submit</button>
         </form>
-        <form id="form2" class="form">
+        <form id="form2" class="form" data-value="2">
           <h2>Real Estate Plannings & Commercial Transactions</h2>
           <input
             type="text"
@@ -278,9 +280,9 @@
             placeholder="OTHER IMPORTANT MESSAGE (if any like risk management, etc.)"
           ></textarea>
           <br />
-          <button type="button" onclick="submitForm(this)">Submit</button>
+          <button type="button" onclick="submitForm(2)">Submit</button>
         </form>
-        <form id="form3" class="form">
+        <form id="form3" class="form" data-value="3">
           <h2>Regulatory Compliance & Financial Documents Form</h2>
           <input
             type="text"
@@ -375,9 +377,9 @@
             placeholder="OTHER IMPORTANT MESSAGE (if any like risk management, etc.)"
           ></textarea>
           <br />
-          <button type="button" onclick="submitForm(this)">Submit</button>
+          <button type="button" onclick="submitForm(3)">Submit</button>
         </form>
-        <form id="form4" class="form">
+        <form id="form4" class="form" data-value="4">
           <h2>Intellectual Properties Form</h2>
           <input
             type="text"
@@ -466,9 +468,9 @@
             placeholder="OTHER IMPORTANT MESSAGE (if any like future plans, etc.)"
           ></textarea>
           <br />
-          <button type="button" onclick="submitForm(this)">Submit</button>
+          <button type="button" onclick="submitForm(4)">Submit</button>
         </form>
-        <form id="form5" class="form">
+        <form id="form5" class="form" data-value="5">
           <h2>Formation & Governance Form</h2>
           <input
             type="text"
@@ -567,7 +569,7 @@
             placeholder="OTHER IMPORTANT MESSAGE (if any)"
           ></textarea>
           <br />
-          <button type="button" onclick="submitForm(this)">Submit</button>
+          <button type="button" onclick="submitForm(5)">Submit</button>
         </form>
       </div>
     </div>
@@ -593,11 +595,11 @@
         var tabs = document.getElementsByClassName("tab");
         for (var i = 0; i < tabs.length; i++) {
           tabs[i].style.marginLeft = "0";
-          tabs[i].style.background = "brown";
+          tabs[i].style.background = "rgba(0, 0, 255, 0.7)";
         }
         tabs[tabIndex - 1].style.marginLeft = "20px";
         tabs[tabIndex - 1].style.marginBottom = "10px";
-        tabs[tabIndex - 1].style.background = "goldenrod";
+        tabs[tabIndex - 1].style.background = "rgba(255, 255, 255, 0.7)";
       }
     </script>
   </body>

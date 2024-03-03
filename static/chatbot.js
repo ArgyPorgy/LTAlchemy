@@ -6,7 +6,7 @@ const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
 
 let userMessage = null; // Variable to store user's message
-const API_KEY = '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' ; // Paste your API key here
+// const API_KEY = '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' ; // Paste your API key here
 HF_TOKEN = "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"
 HUGGINGFACEHUB_API_TOKEN= HF_TOKEN
 const inputInitHeight = chatInput.scrollHeight;
@@ -101,8 +101,12 @@ setTimeout(() => {
     chatbox.appendChild(createChatLiWithInput("incoming"));
 }, 1200);
 });
+
 document.querySelector("#St").addEventListener("click", ()=>{
-window.href("/findlawyer")
+setTimeout(() => {
+    
+    window.href("/findlawyer");
+}, 1200);
 });
 function Locate(){
     chatInput.value = "";
@@ -120,7 +124,7 @@ function About(){
 
 }
 function showHelp() {
-    alert("help");
+    
     chatInput.value = "";
     document.querySelector(".cmdContainer").innerHTML = "";
     chatbox.appendChild(createChatLi("/Help", "outgoing"));
@@ -144,6 +148,21 @@ setTimeout(() => {
 
 
   }
+
+  function scanAdvPDF(){
+    chatInput.value = "";
+    document.querySelector(".cmdContainer").innerHTML = "";
+    chatbox.appendChild(createChatLi("/AdvanceScan", "outgoing"));
+    setTimeout(() => {
+        
+        chatbox.appendChild(createChatLi("Redirecting you to the advance scanning page...", "incoming"));
+
+        setTimeout(() => {
+            window.open("http://localhost:8501/#chat-with-pdf", '_blank');
+        }, 1500);
+    
+}, 1000);
+  }
 function checkCMD() {
     const cmd = document.querySelector(".cmdContainer");
 
@@ -156,6 +175,10 @@ function checkCMD() {
         const scanPDFButton = document.createElement("button");
         scanPDFButton.textContent = "/ScanPDF";
         scanPDFButton.addEventListener("click", scanPDF);
+
+        const scanPDFButtonADV = document.createElement("button");
+        scanPDFButtonADV.textContent = "/AdvanceScan";
+        scanPDFButtonADV.addEventListener("click", scanAdvPDF);
 
         const locateButton = document.createElement("button");
         locateButton.textContent = "/Locate";
@@ -173,6 +196,8 @@ function checkCMD() {
         cmd.innerHTML = ''; // Clear existing content
         cmd.appendChild(helpButton);
         cmd.appendChild(scanPDFButton);
+        cmd.appendChild(scanPDFButtonADV);
+
         cmd.appendChild(locateButton);
         cmd.appendChild(createDocButton);
         cmd.appendChild(aboutButton);
@@ -184,41 +209,40 @@ function checkCMD() {
     }
 }
 
+const API_KEY =  "enter your api key";
 
+const generateResponse= (chatElement) => {
+    const API_URL = "https://api.openai.com/v1/chat/completions";
+    const messageElement = chatElement.querySelector("p");
 
-// const generateResponse= (chatElement) => {
-//     const API_URL = "https://api.openai.com/v1/chat/completions";
-//     const messageElement = chatElement.querySelector("p");
+    // Define the properties and message for the API request
 
-//     // Define the properties and message for the API request
+    if(pdfUP === true)
 
-//     if(pdfUP === true)
-
-//         userMessage = `You are a Legal Ai Assistant and will only answer questions regarding, legal documents.\n The PDF is: { ${pdfText} }. \n User's Question: `+userMessage;    
+        userMessage = `You are a Legal Ai Assistant and will only answer questions regarding, legal documents.\n The PDF is: { ${pdfText} }. \n User's Question: `+userMessage;    
     
-//     else
-//     userMessage = "You are a Legal Ai Assistant and will only answer questions related to legal documents and law. If the user asks you to provide a summary of pdf, ask them to upload the pdf file first using '/scanPDF' command. \n User: "+userMessage;
-    
-//     const requestOptions = {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Authorization": `Bearer ${API_KEY}`
-//         },
-//         body: JSON.stringify({
-//             model: "gpt-3.5-turbo",
-//             messages: [{role: "user", content: userMessage}],
-//         })
-//     }
+    else
+    userMessage = "You are a Legal Ai Assistant and will only answer questions related to legal documents and law. If the user asks you to provide a summary of pdf, ask them to upload the pdf file first using '/scanPDF' command. \n User: "+userMessage; 
+    const requestOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${API_KEY}`
+        },
+        body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{role: "user", content: userMessage}],
+        })
+    }
 
-//     // Send POST request to API, get response and set the reponse as paragraph text
-//     fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
-//         messageElement.textContent = data.choices[0].message.content.trim();
-//     }).catch(() => {
-//         messageElement.classList.add("error");
-//         messageElement.textContent = "Oops! Something went wrong. Please try again.";
-//     }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
-// }
+    // Send POST request to API, get response and set the reponse as paragraph text
+    fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
+        messageElement.textContent = data.choices[0].message.content.trim();
+    }).catch(() => {
+        messageElement.classList.add("error");
+        messageElement.textContent = "Oops! Something went wrong. Please try again.";
+    }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+}
 
 const handleChat = () => {
     userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
@@ -286,72 +310,72 @@ chatbotToggler.addEventListener("click", () => document.body.classList.toggle("s
 // const { RunnablePassthrough } = require('langchain_core').runnables;
 // const { BM25Retriever, EnsembleRetriever } = require('langchain').retrievers;
 
-const generateResponse = async () => {
-    const HF_TOKEN = "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";
-    HUGGINGFACEHUB_API_TOKEN = HF_TOKEN;
+// const generateResponse = async () => {
+//     const HF_TOKEN = "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";
+//     HUGGINGFACEHUB_API_TOKEN = HF_TOKEN;
 
-    const path1 = "agree.pdf";
-    const data1 = new UnstructuredPDFLoader(path1);
-    const content = data1.loadSync();
+//     const path1 = "agree.pdf";
+//     const data1 = new UnstructuredPDFLoader(path1);
+//     const content = data1.loadSync();
 
-    // console.log(content[0].page_content);
+//     // console.log(content[0].page_content);
 
-    // const path2 = "./sample_2.pdf";
-    // const data2 = new UnstructuredPDFLoader(path2);
-    // const content2 = data2.loadSync();
+//     // const path2 = "./sample_2.pdf";
+//     // const data2 = new UnstructuredPDFLoader(path2);
+//     // const content2 = data2.loadSync();
 
-    // const docs = content.concat(content2);
+//     // const docs = content.concat(content2);
 
-    const splitter = new RecursiveCharacterTextSplitter({ chunk_size: 256, chunk_overlap: 50 });
-    const chunks = splitter.splitDocuments(docs);
+//     const splitter = new RecursiveCharacterTextSplitter({ chunk_size: 256, chunk_overlap: 50 });
+//     const chunks = splitter.splitDocuments(docs);
 
-    const embeddings = new HuggingFaceInferenceAPIEmbeddings({
-        api_key: HF_TOKEN,
-        model_name: "BAAI/bge-base-en-v1.5"
-    });
+//     const embeddings = new HuggingFaceInferenceAPIEmbeddings({
+//         api_key: HF_TOKEN,
+//         model_name: "BAAI/bge-base-en-v1.5"
+//     });
 
-    const vectorstore = Chroma.fromDocuments(chunks, embeddings);
+//     const vectorstore = Chroma.fromDocuments(chunks, embeddings);
 
-    const retriever_vectordb = vectorstore.asRetriever({ search_kwargs: { k: 2 } });
+//     const retriever_vectordb = vectorstore.asRetriever({ search_kwargs: { k: 2 } });
 
-    const keyword_retriever = BM25Retriever.fromDocuments(chunks);
-    keyword_retriever.k = 2;
+//     const keyword_retriever = BM25Retriever.fromDocuments(chunks);
+//     keyword_retriever.k = 2;
 
-    const ensemble_retriever = new EnsembleRetriever({
-        retrievers: [retriever_vectordb, keyword_retriever],
-        weights: [0.5, 0.5]
-    });
+//     const ensemble_retriever = new EnsembleRetriever({
+//         retrievers: [retriever_vectordb, keyword_retriever],
+//         weights: [0.5, 0.5]
+//     });
 
-    const llm = new HuggingFaceEndpoint({
-        repo_id: "huggingfaceh4/zephyr-7b-alpha",
-        huggingfacehub_api_token: HF_TOKEN,
-        model_kwargs: { temperature: 0.5, max_new_tokens: 512 }
-    });
+//     const llm = new HuggingFaceEndpoint({
+//         repo_id: "huggingfaceh4/zephyr-7b-alpha",
+//         huggingfacehub_api_token: HF_TOKEN,
+//         model_kwargs: { temperature: 0.5, max_new_tokens: 512 }
+//     });
 
-    const template = `
-    >
-    You are an AI Assistant that follows instructions extremely well.
-    Please be truthful and give direct answers. Please tell 'I don't know' if user query is not in CONTEXT
+//     const template = `
+//     >
+//     You are an AI Assistant that follows instructions extremely well.
+//     Please be truthful and give direct answers. Please tell 'I don't know' if user query is not in CONTEXT
 
-    Keep in mind, you will lose the job, if you answer out of CONTEXT questions
+//     Keep in mind, you will lose the job, if you answer out of CONTEXT questions
 
-    CONTEXT: {context}
-    </s>
+//     CONTEXT: {context}
+//     </s>
 
-    {query}
-    </s>
+//     {query}
+//     </s>
 
-    `;
+//     `;
 
-    const prompt = ChatPromptTemplate.fromTemplate(template);
-    const output_parser = new StrOutputParser();
+//     const prompt = ChatPromptTemplate.fromTemplate(template);
+//     const output_parser = new StrOutputParser();
 
-    const chain = new RunnablePassthrough({
-        context: ensemble_retriever,
-        query: new RunnablePassthrough()
-    }).pipe(prompt).pipe(llm).pipe(output_parser);
+//     const chain = new RunnablePassthrough({
+//         context: ensemble_retriever,
+//         query: new RunnablePassthrough()
+//     }).pipe(prompt).pipe(llm).pipe(output_parser);
 
-    console.log(responses);
-}
+//     console.log(responses);
+// }
 
 // generateResponse();
