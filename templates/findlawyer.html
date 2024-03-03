@@ -1,108 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Find lawyer Page</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='findlawyer.css') }}"
-    />
-  </head>
-  <body>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='findlawyer.css') }}" />
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+<!--     <link rel="stylesheet" href="findlawyer.css"> -->
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+}
+
+/* Hide the search form by default */
+.search-form {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+/* Show the search form when expanded */
+.expanded {
+    max-height: 1000px; /* Adjust this value as needed */
+}
+
+/* Style the search button */
+#searchButton {
+    padding: 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #8a2323;
+    border: 5px solid red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#searchButton:hover {
+    background-color: #E5E483;
+    color: black;
+}
+
+/* Style the search input and button */
+#query {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#searchLawyerForm button[type="submit"] {
+    padding: 10px 20px;
+    left: -10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#searchLawyerForm button[type="submit"]:hover {
+    background-color: #45a049;
+}
+    </style>
+</head>
+
+<body>
     <h1>Find Lawyer by name or Address</h1>
     <button id="searchButton">Find Lawyer</button>
     <div class="search-form" id="searchForm">
-      <h2>Search Lawyers</h2>
-      <form id="searchLawyerForm" action="/findlawyer" method="POST">
-        <label for="query">Search by Name or Address :</label>
-        <input type="text" id="query" name="query" required />
-        <button type="submit">Search</button>
-      </form>
+        <h2>Search Lawyers</h2>
+        <form id="searchLawyerForm" action="/findlawyer" method="POST">
+            <!-- <label for="query">Search by Name or Address :</label> -->
+            <input type="text" id="query" name="query" placeholder="Search by Name or Address :" required />
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
     </div>
 
     <div id="results">
-      {% for result in results %}
-      <div>
-        <img
-          src="static/{{result.image}}"
-          alt="Image Unavailable"
-          class="lawIMG"
-        />
-        <p>Name: {{ result.name }}</p>
-        <p>Email: {{ result.email }}</p>
-        <p>Phone Number: {{ result.phone }}</p>
-        <p>Address: {{ result.address }}</p>
-        <p><a href="https://www.google.com/maps/place/{{ result.address }}" target="_blank">Click for address</a></p>
-        <button
-          class="book-appointment-btn"
-          data-name="{{ result.name }}"
-          data-email="{{ result.email }}"
-          data-phone="{{ result.phone }}"
-        >
-          Book Appointment
-        </button>
-      </div>
-      {% endfor %}
+        {% for result in results %}
+        <div>
+            <img src="static/{{result.image}}" alt="Image Unavailable" class="lawIMG" />
+            <p>Name: {{ result.name }}</p>
+            <p>Email: {{ result.email }}</p>
+            <p>Phone Number: {{ result.phone }}</p>
+            <p>Address: {{ result.address }}</p>
+            <p><a href="https://www.google.com/maps/place/{{ result.address }}" target="_blank">Click for address</a>
+            </p>
+            <button class="book-appointment-btn" data-name="{{ result.name }}" data-email="{{ result.email }}"
+                data-phone="{{ result.phone }}">
+                Book Appointment
+            </button>
+        </div>
+        {% endfor %}
     </div>
 
     <div class="appointment-form" id="appointmentForm">
-      <h2>Book Appointment</h2>
-      <form
-        id="bookAppointmentForm"
-        action="/findlawyer"
-        onsubmit="document.querySelector('#results').style.display = 'none'"
-        method="POST"
-      >
-        <label for="clientName">Your Name:</label>
-        <input type="text" id="clientName" name="clientName" required />
-        <label for="clientEmail">Your Email:</label>
-        <input type="email" id="clientEmail" name="clientEmail" required />
-        <label for="clientPhone">Your Phone Number:</label>
-        <input type="tel" id="clientPhone" name="clientPhone" required />
-        <input type="hidden" id="lawyerName" name="lawyerName" />
-        <input type="hidden" id="lawyerEmail" name="lawyerEmail" />
-        <input type="hidden" id="lawyerPhone" name="lawyerPhone" />
-        <button type="submit">Submit</button>
-      </form>
+        <h2>Book Appointment</h2>
+        <form id="bookAppointmentForm" action="/findlawyer"
+            onsubmit="document.querySelector('#results').style.display = 'none'" method="POST">
+            <label for="clientName">Your Name:</label>
+            <input type="text" id="clientName" name="clientName" required />
+            <label for="clientEmail">Your Email:</label>
+            <input type="email" id="clientEmail" name="clientEmail" required />
+            <label for="clientPhone">Your Phone Number:</label>
+            <input type="tel" id="clientPhone" name="clientPhone" required />
+            <input type="hidden" id="lawyerName" name="lawyerName" />
+            <input type="hidden" id="lawyerEmail" name="lawyerEmail" />
+            <input type="hidden" id="lawyerPhone" name="lawyerPhone" />
+            <button type="submit">Submit</button>
+        </form>
     </div>
 
     <script>
-      document
-        .getElementById("searchButton")
-        .addEventListener("click", function () {
-          var searchForm = document.getElementById("searchForm");
-          if (searchForm.style.display === "none") {
-            searchForm.style.display = "block";
-          } else {
-            searchForm.style.display = "none";
-          }
+        document.getElementById("searchButton").addEventListener("click", function () {
+                var searchForm = document.getElementById("searchForm");
+                searchForm.classList.toggle("expanded");
+            });
+        // document.getElementById("searchButton")
+        //     .addEventListener("click", function () {
+        //         var searchForm = document.getElementById("searchForm");
+        //         if (searchForm.style.display === "none") {
+        //             searchForm.style.display = "block";
+        //         } else {
+        //             searchForm.style.display = "none";
+        //         }
+        //     });
+
+        var bookAppointmentButtons = document.querySelectorAll(
+            ".book-appointment-btn"
+        );
+        bookAppointmentButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                var lawyerName = this.getAttribute("data-name");
+                var lawyerEmail = this.getAttribute("data-email");
+                var lawyerPhone = this.getAttribute("data-phone");
+
+                document.getElementById("lawyerName").value = lawyerName;
+                document.getElementById("lawyerEmail").value = lawyerEmail;
+                document.getElementById("lawyerPhone").value = lawyerPhone;
+
+                document.getElementById("clientEmail").value = "";
+                document.getElementById("clientPhone").value = "";
+                var appointmentForm = document.getElementById("appointmentForm");
+                if (appointmentForm.style.display === "none") {
+                    appointmentForm.style.display = "block";
+                } else {
+                    appointmentForm.style.display = "none";
+                }
+            });
         });
-
-      var bookAppointmentButtons = document.querySelectorAll(
-        ".book-appointment-btn"
-      );
-      bookAppointmentButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-          var lawyerName = this.getAttribute("data-name");
-          var lawyerEmail = this.getAttribute("data-email");
-          var lawyerPhone = this.getAttribute("data-phone");
-
-          document.getElementById("lawyerName").value = lawyerName;
-          document.getElementById("lawyerEmail").value = lawyerEmail;
-          document.getElementById("lawyerPhone").value = lawyerPhone;
-
-          document.getElementById("clientEmail").value = "";
-          document.getElementById("clientPhone").value = "";
-          var appointmentForm = document.getElementById("appointmentForm");
-          if (appointmentForm.style.display === "none") {
-            appointmentForm.style.display = "block";
-          } else {
-            appointmentForm.style.display = "none";
-          }
-        });
-      });
     </script>
-  </body>
+</body>
 </html>
